@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import setResponse from "../helpers/setResponse";
+import setResponse from "../helpers/setResponse.helper";
 
 async function get(req: Request, res: Response) {
   setResponse(

@@ -1,4 +1,5 @@
 import { ITopicConfig } from "kafkajs";
+import { MessageTypeClassName } from "rclnodejs";
 
 export type KafkaTopicConfig = {
   validateOnly?: boolean;
@@ -8,6 +9,9 @@ export type KafkaTopicConfig = {
 };
 
 export type Environments = {
+  application: {
+    port: number;
+  };
   robot: {
     port: number;
   };
@@ -26,4 +30,10 @@ export type Task = {
   task_id: string;
   task_name: string;
   task_json: string;
+};
+
+export type Topic = {
+  type: MessageTypeClassName;
+  name: string;
+  listener?: any;
 };
