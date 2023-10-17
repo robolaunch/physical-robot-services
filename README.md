@@ -8,7 +8,7 @@
       <img src="https://img.shields.io/badge/node-18.18.1-green" alt="release">
     </a>
     <a href="https://github.com/robolaunch/template/releases">
-      <img src="https://img.shields.io/badge/release-v0.0.1-blue" alt="release">
+      <img src="https://img.shields.io/badge/release-v0.0.2-blue" alt="release">
     </a>
     <a href="https://github.com/robolaunch/template/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/robolaunch/template" alt="license">
