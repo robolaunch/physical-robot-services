@@ -1,5 +1,5 @@
 import rosClient from "../clients/ros.client";
-import GetRosTopicListFromCloud from "../functions/GetRosTopicListFromCloud.function";
+import GetRosTopicListFromCloud from "../functions/getRosTopicListFromCloud.function";
 import kafkaSender from "../functions/kafkaSender.function";
 import {
   setSubscribedRosTopics,
