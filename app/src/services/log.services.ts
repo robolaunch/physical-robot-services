@@ -1,17 +1,67 @@
 import { Request, Response } from "express";
 import setResponse from "../helpers/setResponse.helper";
 import getRosLogs from "../functions/getRosLogs.function";
+import { RobotLog } from "../types/types";
+import fs from "fs";
 
 async function get(req: Request, res: Response) {
-  const files = await getRosLogs();
+  try {
+    const files: RobotLog[] | null = await getRosLogs();
 
-  if (files) {
-    setResponse(res, 200, "ROS logs retrieved successfully.", files);
-  } else {
-    setResponse(res, 500, "Error while getting ROS logs.", null);
+    if (files) {
+      setResponse(res, 200, "ROS logs retrieved successfully.", files);
+    } else {
+      setResponse(res, 500, "Error while getting ROS logs.", null);
+    }
+  } catch (error) {
+    setResponse(res, 500, "An error occurred", null);
+  }
+}
+
+async function getWithName(req: Request, res: Response) {
+  fs.readFile(
+    `/home/${process.env.USER}/.ros/log/${req.params.name}`,
+    "utf8",
+    function (err: any, data: any) {
+      if (err) {
+        setResponse(res, 500, "Error while getting ROS logs.", null);
+        return;
+      }
+      setResponse(res, 200, "ROS logs retrieved successfully.", data);
+    }
+  );
+}
+
+async function remove(req: Request, res: Response) {
+  try {
+    const files: RobotLog[] | null = await getRosLogs();
+
+    files?.map((file) => {
+      try {
+        fs.rmSync(`/home/${process.env.USER}/.ros/log/${file.name}`);
+      } catch (error) {
+        throw error;
+      }
+    });
+
+    setResponse(res, 200, "ROS logs removed successfully.", null);
+  } catch (error) {
+    setResponse(res, 500, "Error while removing ROS logs.", null);
+  }
+}
+
+async function removeWithName(req: Request, res: Response) {
+  try {
+    fs.rmSync(`/home/${process.env.USER}/.ros/log/${req.params.name}`);
+    setResponse(res, 200, "ROS log removed successfully.", null);
+  } catch (error) {
+    setResponse(res, 500, "Error while removing ROS log.", null);
   }
 }
 
 export default {
   get,
+  getWithName,
+  remove,
+  removeWithName,
 };

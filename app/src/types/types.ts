@@ -37,3 +37,12 @@ export type Topic = {
   name: string;
   listener?: any;
 };
+
+export type RobotLog = {
+  name: string;
+  isDirectory: boolean;
+  path: string;
+  size: number;
+  createdAt: number;
+  updatedAt: number;
+};

@@ -6,6 +6,7 @@ import appRouters from "./src/routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
 import logRouters from "./src/routes/log.routes";
+import foto from "./src/functions/foto";
 
 async function app() {
   const app = express();
@@ -24,6 +25,8 @@ async function app() {
   );
 
   app.use("/", appRouters);
+
+  foto();
 
   app.use("/log", logRouters);
 
