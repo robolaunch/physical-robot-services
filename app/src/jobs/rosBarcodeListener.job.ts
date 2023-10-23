@@ -18,7 +18,7 @@ export default async function rosBarcodeListenerJob() {
               "barcode",
               JSON.stringify({
                 time: Math.floor(+new Date() / 1000),
-                scanner_id: message.scanner_id,
+                scanner_id: Number(message.scanner_id),
                 barcode: message.barcode,
                 location_x: location.location_x,
                 location_y: location.location_y,
@@ -26,13 +26,13 @@ export default async function rosBarcodeListenerJob() {
               })
             );
           } catch (error) {
-            console.log("[rosBarcodeListenerJob] Error of JSON.parse");
+            console.error("[rosBarcodeListenerJob] Error of JSON.parse");
           }
         }
       }
     );
   } catch (error) {
-    console.log(
+    console.error(
       `[rosBarcodeListenerJob] ROS 'barcode' konusunu dinlerken hata oluştu.`
     );
   }

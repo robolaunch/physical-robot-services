@@ -5,6 +5,7 @@ import env from "./src/providers/environment.provider";
 import appRouters from "./src/routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
+import logRouters from "./src/routes/log.routes";
 
 async function app() {
   const app = express();
@@ -23,6 +24,8 @@ async function app() {
   );
 
   app.use("/", appRouters);
+
+  app.use("/log", logRouters);
 
   const server = app.listen(env.robot.port, async function () {
     rosBarcodeListenerJob();
