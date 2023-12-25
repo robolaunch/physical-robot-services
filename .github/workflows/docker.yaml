@@ -1,4 +1,4 @@
-name: Docker Image (public-dev)
+name: Docker
 
 on:
   push:
@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: public-dev
 
     steps:
       - name: Checkout Code
@@ -23,13 +21,11 @@ jobs:
         run: |
           docker build \
             --file Dockerfile \
-            --tag robolaunchio/physical-robot-services-public:${{ steps.project_version.outputs.version }}-dev \
-            --build-arg APPLICATION_PORT=${{ secrets.APPLICATION_PORT }} \
-            --build-arg ROBOT_PORT=${{ secrets.ROBOT_PORT }} \
+            --tag robolaunchio/physical-robot-services:${{ steps.project_version.outputs.version }} \
             .
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push the Docker Image to Docker Hub
-        run: docker push robolaunchio/physical-robot-services-public:${{ steps.project_version.outputs.version }}-dev
+        run: docker push robolaunchio/physical-robot-services:${{ steps.project_version.outputs.version }}
