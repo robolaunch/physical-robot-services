@@ -9,6 +9,10 @@ export type KafkaTopicConfig = {
 };
 
 export type Environments = {
+  kafka: {
+    host: string;
+    port: number;
+  };
   application: {
     host: string;
     port: number;
