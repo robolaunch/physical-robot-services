@@ -5,6 +5,7 @@ dotenv.config();
 
 const env: Environments = {
   application: {
+    host: process.env.APPLICATION_HOST!,
     port: parseInt(process.env.APPLICATION_PORT!),
   },
 

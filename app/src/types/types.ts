@@ -10,6 +10,7 @@ export type KafkaTopicConfig = {
 
 export type Environments = {
   application: {
+    host: string;
     port: number;
   };
   robot: {
