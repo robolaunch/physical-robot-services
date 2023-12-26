@@ -4,7 +4,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y nodejs npm curl wget
 RUN npm install -g n
 RUN n stable
-RUN source /opt/ros/humble/setup.bash && npm install
-RUN npm run build
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash && npm install"
+RUN /bin/bash -c "npm run build"
 EXPOSE 8078
 ENTRYPOINT [ "node","/build/app.js" ]
