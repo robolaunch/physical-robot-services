@@ -1,10 +1,10 @@
 FROM ros:humble-ros-base as build-stage
 COPY . /app
 WORKDIR /app
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm curl wget
 RUN npm install -g n
 RUN n stable
-RUN npm install
+RUN source /opt/ros/hubmle/setup.bash && npm install
 RUN npm run build
 FROM node:latest as production-stage
 COPY --from=build-stage /app/build /app
