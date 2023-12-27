@@ -1,6 +1,6 @@
 {
   "name": "physical-robot-services",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Physical Robot Services",
   "main": "app/app.ts",
   "scripts": {
