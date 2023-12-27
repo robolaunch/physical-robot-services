@@ -9,9 +9,8 @@ export default async function GetRosTopicListFromCloud() {
 
     return response.data;
   } catch (error) {
-    console.log("error", error);
     console.log(
-      `[GetRosTopicListFromCloud] Error while getting ROS topic list (${env.application.host}:${env.application.port}).`
+      "[GetRosTopicListFromCloud] Error while getting ROS topic list."
     );
     return [];
   }
