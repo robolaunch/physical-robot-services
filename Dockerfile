@@ -7,4 +7,4 @@ RUN n 18.18.2
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && npm install"
 RUN /bin/bash -c "npm run build"
 EXPOSE 8078
-ENTRYPOINT [ "node","/app/build/app.js" ]
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && node /app/build/app.js"]
