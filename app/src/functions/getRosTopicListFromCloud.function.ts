@@ -10,7 +10,7 @@ export default async function GetRosTopicListFromCloud() {
     return response.data;
   } catch (error) {
     console.log(
-      `[GetRosTopicListFromCloud] Error while getting ROS topic list.`
+      `[GetRosTopicListFromCloud] Error while getting ROS topic list (${env.application.host}:${env.application.port}).`
     );
     return [];
   }
