@@ -5,7 +5,7 @@ import {
   setSubscribedRosTopics,
   subscribedRosTopics,
 } from "../global/variables.global";
-import logger from "../helpers/logger";
+import logger from "../helpers/logger.helper";
 import { Topic } from "../types/types";
 
 export default async function rosTopicListenerJob() {

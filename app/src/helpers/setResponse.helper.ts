@@ -1,4 +1,4 @@
-import logger from "./logger";
+import logger from "./logger.helper";
 
 export default function setResponse(
   response: any,

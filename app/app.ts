@@ -6,7 +6,7 @@ import logRouters from "./src/routes/log.routes";
 import appRouters from "./src/routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
-import logger from "./src/helpers/logger";
+import logger from "./src/helpers/logger.helper";
 
 async function app(): Promise<void> {
   const app = express();

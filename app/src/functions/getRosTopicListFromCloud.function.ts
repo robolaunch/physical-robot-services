@@ -1,6 +1,6 @@
 import axios from "axios";
 import env from "../providers/environment.provider";
-import logger from "../helpers/logger";
+import logger from "../helpers/logger.helper";
 
 export default async function GetRosTopicListFromCloud() {
   const url: string = `${env.application.host}:${env.application.port}/topic`;

@@ -8,7 +8,7 @@ export default function logger(log: string) {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false, // 24 saat formatında göster
+        hour12: false,
       })
       .replace(`, `, " ")}] ${log}`
   );
