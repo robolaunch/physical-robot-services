@@ -8,6 +8,8 @@ export default async function rosBarcodeListenerJob() {
       "std_msgs/msg/String",
       "barcode",
       async (msg: any) => {
+        console.log("/barcode", msg);
+
         if (msg.data) {
           try {
             const message = await JSON.parse(msg.data);
@@ -33,7 +35,7 @@ export default async function rosBarcodeListenerJob() {
     );
   } catch (error) {
     console.error(
-      `[rosBarcodeListenerJob] ROS 'barcode' konusunu dinlerken hata oluştu.`
+      `[rosBarcodeListenerJob] Error of create subscription to topic /barcode`
     );
   }
 }
