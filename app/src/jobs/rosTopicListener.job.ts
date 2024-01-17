@@ -5,6 +5,7 @@ import {
   setSubscribedRosTopics,
   subscribedRosTopics,
 } from "../global/variables.global";
+import logger from "../helpers/logger";
 import { Topic } from "../types/types";
 
 export default async function rosTopicListenerJob() {
@@ -55,6 +56,6 @@ export default async function rosTopicListenerJob() {
       }
     });
   } catch (error) {
-    console.log(`[rosListenerTopicJob] Error while listening ROS topics.`);
+    logger(`[rosListenerTopicJob] Error while listening ROS topics.`);
   }
 }

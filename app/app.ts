@@ -6,6 +6,7 @@ import logRouters from "./src/routes/log.routes";
 import appRouters from "./src/routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
+import logger from "./src/helpers/logger";
 
 async function app(): Promise<void> {
   const app = express();
@@ -30,14 +31,14 @@ async function app(): Promise<void> {
   const server = app.listen(env.robot.port, async function () {
     rosBarcodeListenerJob();
     setInterval(rosTopicListenerJob, 10000);
-    console.log(
+    logger(
       `[Physical Robot Services] Service is running on port ${env.robot.port}`
     );
   });
 
   process.on("SIGINT", () => {
     server.close(() => {
-      console.log("[Physical Robot Services] Service is shutting down");
+      logger("[Physical Robot Services] Service is shutting down");
       process.exit(0);
     });
   });
