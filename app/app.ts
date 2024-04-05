@@ -4,9 +4,9 @@ import rosTopicListenerJob from "./src/jobs/rosTopicListener.job";
 import env from "./src/providers/environment.provider";
 import logRouters from "./src/routes/log.routes";
 import appRouters from "./src/routes/app.routes";
+import logger from "./src/helpers/logger.helper";
 import bodyParser from "body-parser";
 import cors from "cors";
-import logger from "./src/helpers/logger.helper";
 
 async function app(): Promise<void> {
   const app = express();
