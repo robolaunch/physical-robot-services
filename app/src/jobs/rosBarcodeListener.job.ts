@@ -20,11 +20,12 @@ export default async function rosBarcodeListenerJob() {
               "barcode",
               JSON.stringify({
                 time: Math.floor(+new Date() / 1000),
-                scanner_id: Number(message.scanner_id),
+                sensorId: Number(message.sensorId),
                 barcode: message.barcode,
-                location_x: location.location_x,
-                location_y: location.location_y,
-                location_z: location.location_z,
+                location_x: message.waypoint.x,
+                location_y: message.waypoint.y,
+                location_z: message.waypoint.z,
+                yaw: message.waypoint.yaw,
               })
             );
           } catch (error) {

@@ -23,7 +23,7 @@ export type Environments = {
 };
 
 export type Barcode = {
-  scanner_id: number;
+  sensorId: number;
   time: number;
   barcode: string;
   location_x: number;
