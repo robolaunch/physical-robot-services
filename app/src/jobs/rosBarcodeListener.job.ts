@@ -21,6 +21,7 @@ export default async function rosBarcodeListenerJob() {
               JSON.stringify({
                 time: Math.floor(+new Date() / 1000),
                 sensorId: Number(message.sensorId),
+                taskId: message.taskId,
                 barcode: message.barcode,
                 location_x: message.waypoint.x,
                 location_y: message.waypoint.y,

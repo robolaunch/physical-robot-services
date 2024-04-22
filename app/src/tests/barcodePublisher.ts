@@ -5,9 +5,10 @@ const initialData = {
   robotId: 1,
   fleetId: 1,
   sensorId: 1,
+  taskId: "1",
   waypoint: {
-    x: 1,
-    y: 1,
+    x: 0,
+    y: 0,
     z: 0,
     yaw: 0.0,
   },
@@ -19,11 +20,24 @@ function commandGenerator(commandData: {
   robotId?: number;
   fleetId?: number;
   sensorId?: number;
+  taskId?: string;
   x: number;
   y: number;
   z: number;
 }) {
-  return `ros2 topic pub --once /barcode std_msgs/msg/String '{\"data\": \"{\\\"robotId\\\": \\\"${commandData.robotId || initialData.robotId}\\\", \\\"fleetId\\\": \\\"${commandData.fleetId || initialData.fleetId}\\\", \\\"sensorId\\\": \\\"${commandData.sensorId || initialData.sensorId}\\\", \\\"barcode\\\": \\\"${randomBarcodeGenerator()}\\\", \\\"waypoint\\\": {\\\"x\\\": ${commandData.x}, \\\"y\\\": ${commandData.y}, \\\"z\\\": ${commandData.z}, \\\"yaw\\\": 0.0}}\"}'`;
+  return `ros2 topic pub --once /barcode std_msgs/msg/String '{\"data\": \"{\\\"robotId\\\": \\\"${
+    commandData.robotId || initialData.robotId
+  }\\\", \\\"fleetId\\\": \\\"${
+    commandData.fleetId || initialData.fleetId
+  }\\\", \\\"sensorId\\\": \\\"${
+    commandData.sensorId || initialData.sensorId
+  }\\\", \\\"barcode\\\": \\\"${randomBarcodeGenerator()}\\\", \\\"waypoint\\\": {\\\"x\\\": ${
+    commandData.x
+  }, \\\"y\\\": ${commandData.y}, \\\"z\\\": ${
+    commandData.z
+  }, \\\"yaw\\\": 0.0}, \\\"taskId\\\": \\\"${
+    commandData.taskId || initialData.taskId
+  }\\\"}\"}'`;
 }
 
 function randomBarcodeGenerator() {
@@ -35,7 +49,7 @@ for (let x = 1; x < 13; x++) {
     for (let z = 0; z < 6; z++) {
       const command = commandGenerator({
         x: initialData.waypoint.x + x,
-        y: initialData.waypoint.y + y,
+        y: initialData.waypoint.y + y * 0.4,
         z: initialData.waypoint.z + z,
       });
       barcodes.push(command);
