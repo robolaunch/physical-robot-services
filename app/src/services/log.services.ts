@@ -20,7 +20,10 @@ async function get(req: Request, res: Response) {
 
 async function getWithName(req: Request, res: Response) {
   fs.readFile(
-    `/home/${process.env.USER}/.ros/log/${req.params.name}`,
+    req.params.name.includes(".log")
+      ? `/home/${process.env.USER}/.ros/log/${req.params.name}`
+      : `/home/${process.env.USER}/.ros/log/${req.params.name}/launch.log`,
+
     "utf8",
     function (err: any, data: any) {
       if (err) {
