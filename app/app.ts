@@ -2,6 +2,7 @@ import rosBarcodeListenerJob from "./src/jobs/rosBarcodeListener.job";
 import express, { Request, Response, NextFunction } from "express";
 import rosTopicListenerJob from "./src/jobs/rosTopicListener.job";
 import env from "./src/providers/environment.provider";
+import configRouters from "./src/routes/config.routes";
 import logRouters from "./src/routes/log.routes";
 import appRouters from "./src/routes/app.routes";
 import logger from "./src/helpers/logger.helper";
@@ -27,6 +28,8 @@ async function app(): Promise<void> {
   app.use("/", appRouters);
 
   app.use("/log", logRouters);
+
+  app.use("/config", configRouters);
 
   const server = app.listen(env.robot.port, async function () {
     rosBarcodeListenerJob();

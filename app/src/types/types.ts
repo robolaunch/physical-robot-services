@@ -51,3 +51,18 @@ export type RobotLog = {
   createdAt: number;
   updatedAt: number;
 };
+
+export type IConfigLog = {
+  name: string;
+  isDirectory: boolean;
+  path: string;
+  size: number;
+  createdAt: number;
+  updatedAt: number;
+};
+
+export type IConfig = {
+  log: {
+    paths: string[];
+  };
+};

@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
-import setResponse from "../helpers/setResponse.helper";
 import getRosLogs from "../functions/getRosLogs.function";
+import setResponse from "../helpers/setResponse.helper";
+import { Request, Response } from "express";
 import { RobotLog } from "../types/types";
 import fs from "fs";
 
 async function get(req: Request, res: Response) {
+  console.log("getRosLogs", req.header);
+
   try {
     const files: RobotLog[] | null = await getRosLogs();
 
@@ -18,21 +20,15 @@ async function get(req: Request, res: Response) {
   }
 }
 
-async function getWithName(req: Request, res: Response) {
-  fs.readFile(
-    req.params.name.includes(".log")
-      ? `/home/${process.env.USER}/.ros/log/${req.params.name}`
-      : `/home/${process.env.USER}/.ros/log/${req.params.name}/launch.log`,
-
-    "utf8",
-    function (err: any, data: any) {
-      if (err) {
-        setResponse(res, 500, "Error while getting ROS logs.", null);
-        return;
-      }
-      setResponse(res, 200, "ROS logs retrieved successfully.", data);
+async function post(req: Request, res: Response) {
+  console.log("getRosLogs", req.header);
+  fs.readFile(req.body.path, "utf8", function (err: any, data: any) {
+    if (err) {
+      setResponse(res, 500, "Error while getting ROS logs.", null);
+      return;
     }
-  );
+    setResponse(res, 200, "ROS logs retrieved successfully.", data);
+  });
 }
 
 async function remove(req: Request, res: Response) {
@@ -64,7 +60,7 @@ async function removeWithName(req: Request, res: Response) {
 
 export default {
   get,
-  getWithName,
+  post,
   remove,
   removeWithName,
 };

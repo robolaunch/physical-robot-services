@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", logServices.get);
 
-router.get("/:name", logServices.getWithName);
+router.post("/", logServices.post);
 
 router.delete("/", logServices.remove);
 

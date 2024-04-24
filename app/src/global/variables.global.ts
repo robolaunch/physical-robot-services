@@ -1,7 +1,7 @@
-let subscribedRosTopics: any[] = [];
+export let subscribedRosTopics: any[] = [];
 
-function setSubscribedRosTopics(topics: string[]) {
+export function setSubscribedRosTopics(topics: string[]) {
   subscribedRosTopics = topics;
 }
 
-export { subscribedRosTopics, setSubscribedRosTopics };
+export const filePath = `/home/${process.env.USER}/.ros/config.json`;
