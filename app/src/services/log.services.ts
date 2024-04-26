@@ -5,8 +5,6 @@ import { RobotLog } from "../types/types";
 import fs from "fs";
 
 async function get(req: Request, res: Response) {
-  console.log("getRosLogs", req.header);
-
   try {
     const files: RobotLog[] | null = await getRosLogs();
 
@@ -21,7 +19,6 @@ async function get(req: Request, res: Response) {
 }
 
 async function post(req: Request, res: Response) {
-  console.log("getRosLogs", req.header);
   fs.readFile(req.body.path, "utf8", function (err: any, data: any) {
     if (err) {
       setResponse(res, 500, "Error while getting ROS logs.", null);
