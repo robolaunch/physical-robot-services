@@ -8,6 +8,7 @@ import appRouters from "./src/routes/app.routes";
 import logger from "./src/helpers/logger.helper";
 import bodyParser from "body-parser";
 import cors from "cors";
+import rosMapFlowScheduler from "./src/jobs/rosMapFlowScheduler.job";
 
 async function app(): Promise<void> {
   const app = express();
@@ -33,6 +34,8 @@ async function app(): Promise<void> {
 
   const server = app.listen(env.robot.port, async function () {
     rosBarcodeListenerJob();
+    rosMapFlowScheduler();
+
     setInterval(rosTopicListenerJob, 10000);
     logger(
       `[Physical Robot Services] Service is running on port ${env.robot.port}`

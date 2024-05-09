@@ -44,8 +44,8 @@ function randomBarcodeGenerator() {
   return Math.random().toString(36).substr(2, 8);
 }
 
-for (let x = 1; x < 1300; x++) {
-  for (let y = 1; y < 1300; y++) {
+for (let x = 1; x < 13; x++) {
+  for (let y = 1; y < 13; y++) {
     for (let z = 0; z < 6; z++) {
       const command = commandGenerator({
         x: initialData.waypoint.x + x,

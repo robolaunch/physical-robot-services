@@ -5,3 +5,5 @@ export function setSubscribedRosTopics(topics: string[]) {
 }
 
 export const filePath = `/home/${process.env.USER}/.ros/config.json`;
+
+export const mapPath = "/tmp/rosMaps/";
