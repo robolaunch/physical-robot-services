@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-import { mapPath } from "../global/variables.global";
+import { rosStoragePath } from "../global/variables.global";
 import logger from "../helpers/logger.helper";
 import fs from "fs";
 import kafkaSender from "./kafkaSender.function";
@@ -7,16 +7,16 @@ import kafkaSender from "./kafkaSender.function";
 export function rosMapSaver(): Promise<boolean> {
   return new Promise<boolean>((resolve, reject) => {
     exec(
-      `ros2 run nav2_map_server map_saver_cli -f ${mapPath}map --fmt png`,
+      `ros2 run nav2_map_server map_saver_cli -f ${rosStoragePath}map --fmt png`,
       (_, stdout, stderr) => {
         if (
           stdout?.includes("Map saved") &&
           stderr?.includes("Map saved successfully")
         ) {
-          logger("Map saved successfully.");
+          logger("[Robot Map Service] Map saved successfully.");
           resolve(true);
         } else {
-          logger("Error of saving map!");
+          logger("[Robot Map Service] Error of saving map!");
           reject(false);
         }
       }
@@ -25,11 +25,11 @@ export function rosMapSaver(): Promise<boolean> {
 }
 
 export function rosMapIMAGESender() {
-  const image = fs.readFileSync(`${mapPath}map.png`);
+  const image = fs.readFileSync(`${rosStoragePath}map.png`);
   kafkaSender("rosmapIMAGE", image);
 }
 
 export function rosMapYAMLSender() {
-  const yaml = fs.readFileSync(`${mapPath}map.yaml`);
+  const yaml = fs.readFileSync(`${rosStoragePath}map.yaml`);
   kafkaSender("rosmapYAML", yaml.toString());
 }

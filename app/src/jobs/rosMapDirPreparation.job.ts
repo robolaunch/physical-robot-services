@@ -3,7 +3,7 @@ import logger from "../helpers/logger.helper";
 
 export default function rosMapDirPreparation(): void {
   exec(
-    "cd /tmp && mkdir rosMaps && chmod 777 rosMaps",
+    "cd /tmp && mkdir rosStorage && chmod 777 rosStorage",
 
     (error) => {
       if (error) {

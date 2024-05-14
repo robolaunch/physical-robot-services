@@ -9,6 +9,7 @@ import logger from "./src/helpers/logger.helper";
 import bodyParser from "body-parser";
 import cors from "cors";
 import rosMapFlowScheduler from "./src/jobs/rosMapFlowScheduler.job";
+import robotLocationListener from "./src/jobs/robotLocationListener.job";
 
 async function app(): Promise<void> {
   const app = express();
@@ -35,6 +36,8 @@ async function app(): Promise<void> {
   const server = app.listen(env.robot.port, async function () {
     rosBarcodeListenerJob();
     rosMapFlowScheduler();
+
+    robotLocationListener();
 
     setInterval(rosTopicListenerJob, 10000);
     logger(
