@@ -10,21 +10,23 @@ export default function robotLocationListener() {
   }, 5000);
 
   rosClient.createSubscription("tf2_msgs/msg/TFMessage", "/tf", (msg: any) => {
-    const allTransforms = msg.transforms;
-    const baseLink = allTransforms.find((transform: any) => {
-      return (
-        transform.child_frame_id === "base_footprint" ||
-        transform.child_frame_id === "base_link"
-      );
-    })?.transform;
+    try {
+      const allTransforms = msg.transforms;
+      const baseLink = allTransforms.find((transform: any) => {
+        return (
+          transform.child_frame_id === "base_footprint" ||
+          transform.child_frame_id === "base_link"
+        );
+      })?.transform;
 
-    if (status && baseLink) {
-      console.log(baseLink);
+      if (status && baseLink) {
+        kafkaSender("robotLocation", JSON.stringify(baseLink));
+        logger("[Robot Location Service] Robot location saved.");
 
-      kafkaSender("robotLocation", JSON.stringify(baseLink));
-      logger("[Robot Location Service] Robot location saved.");
-
-      status = !status;
+        status = !status;
+      }
+    } catch (error) {
+      logger("[Robot Location Service] Error while saving robot location.");
     }
   });
 }
