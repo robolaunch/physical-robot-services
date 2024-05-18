@@ -5,6 +5,7 @@ import env from "./src/providers/environment.provider";
 import configRouters from "./src/routes/config.routes";
 import logRouters from "./src/routes/log.routes";
 import appRouters from "./src/routes/app.routes";
+import jobRouters from "./src/routes/job.routes";
 import logger from "./src/helpers/logger.helper";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -30,6 +31,8 @@ async function app(): Promise<void> {
   app.use("/", appRouters);
 
   app.use("/log", logRouters);
+
+  app.use("/job", jobRouters);
 
   app.use("/config", configRouters);
 
