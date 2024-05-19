@@ -31,7 +31,7 @@ async function start(req: Request, res: Response) {
 async function stop(req: Request, res: Response) {
   try {
     exec(
-      `. /opt/ros/humble/setup.sh && ros2 lifecycle set /bt_navigator deactivate && ros2 lifecycle set /bt_navigator  `
+      `. /opt/ros/humble/setup.sh && ros2 lifecycle set /bt_navigator deactivate && ros2 lifecycle set /bt_navigator activate`
     );
 
     setResponse(
