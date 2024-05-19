@@ -10,7 +10,7 @@ class WaypointNavigator(Node):
     def __init__(self):
         super().__init__('waypoint_navigator')
         self.action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
-        self.filename = 'waypoints.json'
+        self.filename = '/tmp/rosStorage/waypoints.json'
         self.waypoints = self.load_waypoints()
         self.current_waypoint_index = 0
 
